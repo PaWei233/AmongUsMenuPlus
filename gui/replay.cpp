@@ -464,17 +464,17 @@ namespace Replay
 		const auto& map = maps[(size_t)State.mapType];
 		ImGui::SetNextWindowSize(ImVec2((map.mapImage.imageWidth * 0.5f) + 50.0f, (map.mapImage.imageHeight * 0.5f) + 90.f) * State.dpiScale, ImGuiCond_None);
 
-		ImGui::Begin("Replay", &State.ShowReplay, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse);
+		ImGui::Begin((const char*)u8"回放", &State.ShowReplay, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse);
 
 		ImGui::BeginChild("replay#filter", ImVec2(0, 20) * State.dpiScale, true);
-		ImGui::Text("Event Filter: ");
+		ImGui::Text((const char*)u8"事件过滤器：");
 		ImGui::SameLine();
-		CustomListBoxIntMultiple("Event Types", &Replay::event_filter, 100.f * State.dpiScale);
+		CustomListBoxIntMultiple((const char*)u8"事件类型", &Replay::event_filter, 100.f * State.dpiScale);
 		if (IsInGame()) {
 			ImGui::SameLine(0.f * State.dpiScale, 5.f * State.dpiScale);
-			ImGui::Text("Player Filter: ");
+			ImGui::Text((const char*)u8"玩家过滤器：");
 			ImGui::SameLine();
-			CustomListBoxPlayerSelectionMultiple("Players", &Replay::player_filter, 150.f * State.dpiScale);
+			CustomListBoxPlayerSelectionMultiple((const char*)u8"玩家", &Replay::player_filter, 150.f * State.dpiScale);
 		}
 		ImGui::EndChild();
 		ImGui::Separator();

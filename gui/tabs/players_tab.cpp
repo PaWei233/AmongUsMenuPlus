@@ -12,7 +12,7 @@ namespace PlayersTab {
 
 	void Render() {
 		if (IsInGame() || IsInLobby()) {
-			if (ImGui::BeginTabItem("Players")) {
+			if (ImGui::BeginTabItem((const char*)u8"玩家")) {
 				ImGui::BeginChild("players#list", ImVec2(200, 0) * State.dpiScale, true);
 				auto selectedPlayer = State.selectedPlayer.validate();
 				bool shouldEndListBox = ImGui::ListBoxHeader("###players#list", ImVec2(200, 150) * State.dpiScale);
@@ -62,7 +62,7 @@ namespace PlayersTab {
 
 				if (selectedPlayer.has_value()) //Upon first startup no player is selected.  Also rare case where the playerdata is deleted before the next gui cycle
 				{
-					ImGui::Text("Is using AUM: %s",
+					ImGui::Text((const char*)u8"是否开AUM： %s",
 						selectedPlayer.is_LocalPlayer() || std::count(State.aumUsers.begin(), State.aumUsers.end(), selectedPlayer.get_PlayerData()->fields.PlayerId)
 						? "Yes" : "No");
 				}
@@ -70,7 +70,7 @@ namespace PlayersTab {
 
 				if (IsInMultiplayerGame() && IsInGame()) {
 					float taskPercentage = (float) (*Game::pGameData)->fields.CompletedTasks / (float) (*Game::pGameData)->fields.TotalTasks;
-					ImGui::TextColored(ImVec4(1.0f - taskPercentage, 1.0f, 1.0f - taskPercentage, 1.0f), "%.1f%% Total Tasks Completed", taskPercentage * 100);
+					ImGui::TextColored(ImVec4(1.0f - taskPercentage, 1.0f, 1.0f - taskPercentage, 1.0f), (const char*)u8"%.1f%% 完成任务总数", taskPercentage * 100);
 				}
 
 				ImGui::EndChild();
@@ -79,13 +79,13 @@ namespace PlayersTab {
 
 				GameOptions options;
 				if (IsInGame() && options.GetGameMode() != GameModes__Enum::HideNSeek && !GetPlayerData(*Game::pLocalPlayer)->fields.IsDead) { //Player selection doesn't matter
-					if (ImGui::Button("Call Meeting")) {
+					if (ImGui::Button((const char*)u8"发起会议")) {
 						State.rpcQueue.push(new RpcReportPlayer({}));
 					}
 				}
 				if (State.activeImpersonation)
 				{
-					if (ImGui::Button("Reset Impersonation"))
+					if (ImGui::Button((const char*)u8"重置伪装"))
 					{
 						std::queue<RPCInterface*> *queue = nullptr;
 
@@ -111,7 +111,7 @@ namespace PlayersTab {
 				{
 					if (IsInGame() && !GetPlayerData(*Game::pLocalPlayer)->fields.IsDead && selectedPlayer.get_PlayerData()->fields.IsDead) {
 						ImGui::NewLine();
-						if (ImGui::Button("Report Body")) {
+						if (ImGui::Button((const char*)u8"报告尸体")) {
 							State.rpcQueue.push(new RpcReportPlayer(selectedPlayer));
 						}
 					}
@@ -120,11 +120,11 @@ namespace PlayersTab {
 					if (IsInGame() && !selectedPlayer.is_Disconnected() && !selectedPlayer.is_LocalPlayer())
 					{
 						if (State.playerToFollow.equals(selectedPlayer)) {
-							if (ImGui::Button("Stop Spectating")) {
+							if (ImGui::Button((const char*)u8"停止观看")) {
 								State.playerToFollow.reset();
 							}
 						} else {
-							if (ImGui::Button("Spectate")) {
+							if (ImGui::Button((const char*)u8"观看")) {
 								State.FreeCam = false;
 								State.playerToFollow = selectedPlayer;
 							}
@@ -132,7 +132,7 @@ namespace PlayersTab {
 					}
 
 					if (selectedPlayer.is_LocalPlayer() && State.originalName != "-") {
-						if (ImGui::Button("Reset Name")) {
+						if (ImGui::Button((const char*)u8"重置名字")) {
 							if (IsInGame())
 								State.rpcQueue.push(new RpcSetName(State.originalName));
 							else if (IsInLobby())
@@ -140,7 +140,7 @@ namespace PlayersTab {
 						}
 					}
 					else if(!selectedPlayer.is_LocalPlayer()) {
-						if ((IsInMultiplayerGame() || IsInLobby()) && ImGui::Button("Steal Name")) {
+						if ((IsInMultiplayerGame() || IsInLobby()) && ImGui::Button((const char*)u8"窃取名字")) {
 							ImpersonateName(selectedPlayer.get_PlayerData());
 						}
 					}
@@ -148,7 +148,7 @@ namespace PlayersTab {
 						if (!selectedPlayer.is_LocalPlayer()) {
 							app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(selectedPlayer.get_PlayerData());
 							if (outfit != NULL) {
-								if (ImGui::Button("Impersonate")) {
+								if (ImGui::Button((const char*)u8"伪装他")) {
 
 									auto petId = outfit->fields.PetId;
 									auto skinId = outfit->fields.SkinId;
@@ -192,7 +192,7 @@ namespace PlayersTab {
 						&& !GetPlayerData(*Game::pLocalPlayer)->fields.IsDead && ((*Game::pLocalPlayer)->fields.killTimer <= 0.0f)
 						&& selectedPlayer.get_PlayerControl()->fields.protectedByGuardianId <= -1)
 					{
-						if (ImGui::Button("Kill Player"))
+						if (ImGui::Button((const char*)u8"杀死他"))
 						{
 							previousPlayerPosition = GetTrueAdjustedPosition(*Game::pLocalPlayer);
 							State.rpcQueue.push(new CmdCheckMurder(selectedPlayer));
@@ -208,7 +208,7 @@ namespace PlayersTab {
 					else framesPassed--;
 
 					if (!selectedPlayer.is_LocalPlayer()) {
-						if (ImGui::Button("Teleport To")) {
+						if (ImGui::Button((const char*)u8"传送至他")) {
 							if(IsInGame())
 								State.rpcQueue.push(new RpcSnapTo(GetTrueAdjustedPosition(selectedPlayer.get_PlayerControl())));
 							else if (IsInLobby())
@@ -224,18 +224,18 @@ namespace PlayersTab {
 
 						if (State.RevealRoles && PlayerIsImpostor(selectedPlayer.get_PlayerData()))
 						{
-							ImGui::TextColored(ImVec4(0.8F, 0.2F, 0.0F, 1.0F), "Fake Tasks:");
+							ImGui::TextColored(ImVec4(0.8F, 0.2F, 0.0F, 1.0F), (const char*)u8"假任务：");
 						}
 						else
 						{
-							ImGui::Text("Tasks:");
+							ImGui::Text((const char*)u8"任务：");
 						}
 
 						bool shouldEndListBox = ImGui::ListBoxHeader("###tasks#list", ImVec2(181, 94) * State.dpiScale);
 
 						if (selectedPlayer.get_PlayerControl()->fields.myTasks == nullptr)
 						{
-							ImGui::Text("ERROR: Could not load tasks.");
+							ImGui::Text((const char*)u8"ERROR: 无法加载任务。");
 						}
 						else
 						{

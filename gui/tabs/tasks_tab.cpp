@@ -8,12 +8,12 @@
 namespace TasksTab {
 	void Render() {
 		if (IsInGame() && GetPlayerData(*Game::pLocalPlayer)->fields.Tasks != NULL) {
-			if (ImGui::BeginTabItem("Tasks")) {
+			if (ImGui::BeginTabItem((const char*)u8"任务")) {
 				ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 				if (!PlayerIsImpostor(GetPlayerData(*Game::pLocalPlayer))) {
 					auto tasks = GetNormalPlayerTasks(*Game::pLocalPlayer);
 
-					if (ImGui::Button("Complete All Tasks")) {
+					if (ImGui::Button((const char*)u8"完成所有任务")) {
 						for (auto task : tasks) {
 							if (task->fields.taskStep != task->fields.MaxStep)
 								State.rpcQueue.push(new RpcCompleteTask(task->fields._._Id_k__BackingField));
@@ -40,22 +40,22 @@ namespace TasksTab {
 					ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 				}
 
-				if (ImGui::Button("Play Shields Animation"))
+				if (ImGui::Button((const char*)u8"播放防护罩动画"))
 				{
 					State.rpcQueue.push(new RpcPlayAnimation(1));
 				}
 
-				if (ImGui::Button("Play Weapons Animation"))
+				if (ImGui::Button((const char*)u8"播放武器动画"))
 				{
 					State.rpcQueue.push(new RpcPlayAnimation(6));
 				}
 
-				if (ImGui::Button("Play Trash Animation"))
+				if (ImGui::Button((const char*)u8"播放倒垃圾动画"))
 				{
 					State.rpcQueue.push(new RpcPlayAnimation(10));
 				}
 
-				if (ImGui::Checkbox("Play Medbay Scan Animation", &State.PlayMedbayScan))
+				if (ImGui::Checkbox((const char*)u8"播放扫描动画", &State.PlayMedbayScan))
 				{
 					if (State.PlayMedbayScan)
 					{
@@ -67,7 +67,7 @@ namespace TasksTab {
 					}
 				}
 
-				if (ImGui::Checkbox("Fake Cameras In Use", &State.FakeCameraUsage))
+				if (ImGui::Checkbox((const char*)u8"使用中的假画面", &State.FakeCameraUsage))
 				{
 					State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Security, (State.FakeCameraUsage ? 1 : 0)));
 				}

@@ -10,16 +10,16 @@ extern void RevealAnonymousVotes(); // in MeetingHud.cpp
 
 namespace SelfTab {
     void Render() {
-        if (ImGui::BeginTabItem("Self")) {
+        if (ImGui::BeginTabItem((const char*)u8"自我")) {
             ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
-            if (ImGui::Checkbox("Max Vision", &State.MaxVision)) {
+            if (ImGui::Checkbox((const char*)u8"最大视野", &State.MaxVision)) {
                 State.Save();
             }
-            if (ImGui::Checkbox("Wallhack", &State.Wallhack)) {
+            if (ImGui::Checkbox((const char*)u8"透视", &State.Wallhack)) {
                 State.Save();
             }
 
-            if (ImGui::Checkbox("Freecam", &State.FreeCam)) {
+            if (ImGui::Checkbox((const char*)u8"自由摄像机", &State.FreeCam)) {
                 if (IsInGame()) {
                     State.playerToFollow = PlayerSelection();
                 }
@@ -32,7 +32,7 @@ namespace SelfTab {
             ImGui::SameLine(145.0f * State.dpiScale);
             SteppedSliderFloat("  ", &State.FreeCamSpeed, 0.5f, 3.f, 0.25f, "%.2fx Speed", ImGuiSliderFlags_Logarithmic | ImGuiSliderFlags_NoInput);
 
-            ImGui::Checkbox("Zoom", &State.EnableZoom);
+            ImGui::Checkbox((const char*)u8"缩放", &State.EnableZoom);
             ImGui::SameLine();
             HotKey(State.KeyBinds.Toggle_Zoom);
 
@@ -43,14 +43,14 @@ namespace SelfTab {
             ImGui::Separator();
             ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 
-            if (ImGui::Checkbox("Always show Chat Button", &State.ChatAlwaysActive)) {
+            if (ImGui::Checkbox((const char*)u8"始终显示聊天按钮", &State.ChatAlwaysActive)) {
                 State.Save();
             }
             ImGui::SameLine();
-            if (ImGui::Checkbox("Allow Paste in Chat", &State.ChatPaste)) {
+            if (ImGui::Checkbox((const char*)u8"允许在聊天中粘贴", &State.ChatPaste)) {
                 State.Save();
             }
-            if (ImGui::Checkbox("Read Messages by Ghosts", &State.ReadGhostMessages)) {
+            if (ImGui::Checkbox((const char*)u8"读取幽灵消息", &State.ReadGhostMessages)) {
                 State.Save();
             }
 
@@ -58,51 +58,51 @@ namespace SelfTab {
             ImGui::Separator();
             ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 
-            if (ImGui::Checkbox("Reveal Roles", &State.RevealRoles)) {
+            if (ImGui::Checkbox((const char*)u8"揭晓身份", &State.RevealRoles)) {
                 State.Save();
             }
             ImGui::SameLine(120.0f * State.dpiScale);
-            if (ImGui::Checkbox("Abbrv. Role", &State.AbbreviatedRoleNames))
+            if (ImGui::Checkbox((const char*)u8"缩写身份", &State.AbbreviatedRoleNames))
             {
                 State.Save();
             }
-            if (ImGui::Checkbox("Reveal Votes", &State.RevealVotes)) {
+            if (ImGui::Checkbox((const char*)u8"揭晓投票", &State.RevealVotes)) {
                 State.Save();
             }
             if (!IsInGame() && !IsInLobby() 
                 || GameOptions().GetGameMode() != GameModes__Enum::Normal
                 || GameOptions().GetBool(app::BoolOptionNames__Enum::AnonymousVotes)) {
                 ImGui::SameLine(120.0f * State.dpiScale);
-                if (ImGui::Checkbox("Reveal Anonymous Votes", &State.RevealAnonymousVotes)) {
+                if (ImGui::Checkbox((const char*)u8"揭晓匿名投票", &State.RevealAnonymousVotes)) {
                     State.Save();
                     RevealAnonymousVotes();
                 }
             }
 
-            if (ImGui::Checkbox("See Ghosts", &State.ShowGhosts)) {
+            if (ImGui::Checkbox((const char*)u8"看见幽灵", &State.ShowGhosts)) {
                 State.Save();
             }
             ImGui::SameLine(120.0f * State.dpiScale);
-            if (ImGui::Checkbox("See Protections", &State.ShowProtections))
+            if (ImGui::Checkbox((const char*)u8"看见保护", &State.ShowProtections))
             {
                 State.Save();
             }
             ImGui::SameLine(260.0f * State.dpiScale);
-            if (ImGui::Checkbox("See Kill Cooldown", &State.ShowKillCD)) {
+            if (ImGui::Checkbox((const char*)u8"看见击杀冷却", &State.ShowKillCD)) {
                 State.Save();
             }
 
-            if (ImGui::Checkbox("Unlock Vents", &State.UnlockVents)) {
+            if (ImGui::Checkbox((const char*)u8"解锁通风口", &State.UnlockVents)) {
                 State.Save();
             }
             ImGui::SameLine(120.0f * State.dpiScale);
-            if (ImGui::Checkbox("Move While in Vent", &State.MoveInVent) && IsInGame()) {
+            if (ImGui::Checkbox((const char*)u8"在通风管移动", &State.MoveInVent) && IsInGame()) {
                 if (!State.MoveInVent && (State.InMeeting || (*Game::pLocalPlayer)->fields.inVent)) {
                     (*Game::pLocalPlayer)->fields.moveable = false;
                 }
             }
 
-            if (ImGui::Checkbox("No Clip", &State.NoClip)) {
+            if (ImGui::Checkbox((const char*)u8"穿墙", &State.NoClip)) {
                 if (State.LobbyTimer == 0 || !IsInLobby()) {
                     if (!IsInGame() && !IsInLobby()) State.NoClip = false;
                     else {
@@ -118,7 +118,7 @@ namespace SelfTab {
             ImGui::SameLine();
             HotKey(State.KeyBinds.Toggle_Noclip);
 
-            if (ImGui::Checkbox("Right-click Teleport", &State.RightClickTeleport)) {
+            if (ImGui::Checkbox((const char*)u8"右键单击传送", &State.RightClickTeleport)) {
                 State.Save();
             }
 

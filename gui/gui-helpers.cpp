@@ -335,7 +335,7 @@ bool HotKey(uint8_t& key)
 	if (!IsItemHovered())
 		return false;
 
-	SetTooltip("Press any key to change the keybind, ESC to reset");
+	SetTooltip((const char*)u8"按任意键更改绑定，按ESC重置");
 	for (uint8_t vKey : KeyBinds::GetValidKeys()) {
 		if (KeyBinds::IsKeyDown(vKey)) {
 			key = (vKey != VK_ESCAPE ? vKey : 0x00);

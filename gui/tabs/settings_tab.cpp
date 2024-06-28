@@ -1,4 +1,4 @@
-#include "pch-il2cpp.h"
+﻿#include "pch-il2cpp.h"
 #include "settings_tab.h"
 #include "utility.h"
 #include "gui-helpers.hpp"
@@ -11,15 +11,15 @@
 
 namespace SettingsTab {
 	void Render() {
-		if (ImGui::BeginTabItem("Settings")) {
+		if (ImGui::BeginTabItem((const char*)u8"设置")) {
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
-			ImGui::Text("Show/Hide Menu Keybind:");
+			ImGui::Text((const char*)u8"显示/隐藏 菜单按键绑定：");
 			ImGui::SameLine();
 			if (HotKey(State.KeyBinds.Toggle_Menu)) {
 				State.Save();
 			}
 
-			ImGui::Text("Show/Hide Console Keybind:");
+			ImGui::Text((const char*)u8"显示/隐藏 控制台绑定键：");
 			ImGui::SameLine();
 			if (HotKey(State.KeyBinds.Toggle_Console)) {
 				State.Save();
@@ -28,7 +28,7 @@ namespace SettingsTab {
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale); 
 			ImGui::Separator();
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
-			if (ImGui::Checkbox("Adjust by DPI", &State.AdjustByDPI)) {
+			if (ImGui::Checkbox((const char*)u8"按DPI调整", &State.AdjustByDPI)) {
 				if (!State.AdjustByDPI) {
 					State.dpiScale = 1.0f;
 				}
@@ -58,20 +58,29 @@ namespace SettingsTab {
 			//Change this to in game only once account is overridden
 			{
 				char* nameBuffer[12]{ const_cast<char*>(State.userName.c_str()) };
-				if (ImGui::InputText("PlayerName", *nameBuffer, IM_ARRAYSIZE(nameBuffer))) {
+				if (ImGui::InputText((const char*)u8"玩家名称", *nameBuffer, IM_ARRAYSIZE(nameBuffer))) {
+					
 					State.userName = std::string(*nameBuffer);
 				}
 			}
 			if (State.userName.empty()) {
 				State.userName = GetPlayerName();
 			}
+
+			ImGui::SameLine();
+			if (ImGui::Button((const char*)u8"设置名字"))
+			{
+				State.SetUserName = true;
+			}
+
+			ImGui::Checkbox((const char*)u8"mod模式", &State.ModMode); //已修改，Mod模式选择框
 			
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 			ImGui::Separator();
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 
 			if (Achievements::IsSupported()
-				&& ImGui::Button("Unlock all achievements"))
+				&& ImGui::Button((const char*)u8"解锁所有成就"))
 			{
 				Achievements::UnlockAll();
 			}

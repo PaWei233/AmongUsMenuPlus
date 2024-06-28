@@ -6,16 +6,16 @@
 
 namespace ReplayTab {
 	void Render() {
-		if (ImGui::BeginTabItem("Replay")) {
+		if (ImGui::BeginTabItem((const char*)u8"回放")) {
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
-			if (ImGui::Checkbox("Show Replay", &State.ShowReplay)) {
+			if (ImGui::Checkbox((const char*)u8"显示回放", &State.ShowReplay)) {
 				State.Save();
 			}
 			ImGui::SameLine();
 			if (HotKey(State.KeyBinds.Toggle_Replay)) {
 				State.Save();
 			}
-			if (ImGui::Checkbox("Show only last", &State.Replay_ShowOnlyLastSeconds))
+			if (ImGui::Checkbox((const char*)u8"只显示最后", &State.Replay_ShowOnlyLastSeconds))
 			{
 				State.Save();
 			}
@@ -25,7 +25,7 @@ namespace ReplayTab {
 				State.Save();
 			}
 
-			if (ImGui::Checkbox("Clear after meeting", &State.Replay_ClearAfterMeeting))
+			if (ImGui::Checkbox((const char*)u8"会议后清空", &State.Replay_ClearAfterMeeting))
 			{
 				State.Save();
 			}

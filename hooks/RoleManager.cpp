@@ -7,6 +7,11 @@
 #include "game.h"
 
 void dRoleManager_SelectRoles(RoleManager* __this, MethodInfo* method) {
+	if (State.ModMode)	// 已修改，Mod模式禁用身份修改
+	{
+		RoleManager_SelectRoles(__this, method);
+		return;
+	}
 	std::vector<uint8_t> assignedPlayers;
 	GameOptions options;
 	auto allPlayers = GetAllPlayerControl();

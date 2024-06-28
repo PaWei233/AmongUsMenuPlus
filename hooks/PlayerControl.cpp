@@ -38,7 +38,8 @@ static Color32 GetKillCooldownColor(float killTimer) {
 float dPlayerControl_fixedUpdateTimer = 50;
 float dPlayerControl_fixedUpdateCount = 0;
 void dPlayerControl_FixedUpdate(PlayerControl* __this, MethodInfo* method) {
-	dPlayerControl_fixedUpdateTimer = round(1.f / Time_get_fixedDeltaTime(nullptr));
+	// 已修改，不把我是挂b写在脸上
+	/*dPlayerControl_fixedUpdateTimer = round(1.f / Time_get_fixedDeltaTime(nullptr));
 	if (__this == *Game::pLocalPlayer) {
 		if (State.rpcCooldown == 0) {
 			MessageWriter* rpcMessage = InnerNetClient_StartRpc((InnerNetClient*)(*Game::pAmongUsClient), __this->fields._.NetId, (uint8_t)42069, (SendOption__Enum)1, NULL);
@@ -49,7 +50,7 @@ void dPlayerControl_FixedUpdate(PlayerControl* __this, MethodInfo* method) {
 		else {
 			State.rpcCooldown--;
 		}
-	}
+	}*/
 
 	if (IsInGame()) {
 		auto playerData = GetPlayerData(__this);
@@ -76,7 +77,7 @@ void dPlayerControl_FixedUpdate(PlayerControl* __this, MethodInfo* method) {
 									  color.r, color.g, color.b, color.a,
 									  killTimer);
 		}
-		if (State.RevealRoles)
+		if (State.RevealRoles && !State.ModMode)	// 已修改，Mod模式下不修改玩家名字
 		{
 			std::string roleName = GetRoleName(playerData->fields.Role, State.AbbreviatedRoleNames);
 			playerName += "\n<size=50%>(" + roleName + ")";
@@ -370,7 +371,10 @@ void dPlayerControl_StartMeeting(PlayerControl* __this, GameData_PlayerInfo* tar
 }
 
 void dPlayerControl_HandleRpc(PlayerControl* __this, uint8_t callId, MessageReader* reader, MethodInfo* method) {
-	HandleRpc(callId, reader);
+	if (!State.ModMode)	// 已修改，Mod模式不捕获RPC，防止影响Mod工作
+	{
+		HandleRpc(callId, reader);
+	}
 	PlayerControl_HandleRpc(__this, callId, reader, NULL);
 }
 

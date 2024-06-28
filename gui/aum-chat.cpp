@@ -33,7 +33,7 @@ namespace ChatGui
 	void Render() {
 		ChatGui::Init();
 
-		ImGui::Begin("Chat", &State.ShowChat, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar);
+		ImGui::Begin((const char*)u8"ÁÄÌì", &State.ShowChat, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar);
 		ImGui::BeginChild("chat#scroll", ImVec2(511, 270) * State.dpiScale, true, ImGuiWindowFlags_AlwaysVerticalScrollbar);
 
 		size_t i = 0;
@@ -67,7 +67,7 @@ namespace ChatGui
 
 		ImGui::SameLine(340.f * State.dpiScale);
 
-		if (ImGui::Button("Send")) {
+		if (ImGui::Button((const char*)u8"·¢ËÍ")) {
 			SendChatMessage(std::string(inputBuffer));
 		}
 

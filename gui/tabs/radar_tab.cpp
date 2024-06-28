@@ -6,9 +6,9 @@
 
 namespace RadarTab {
 	void Render() {
-		if (ImGui::BeginTabItem("Radar")) {
+		if (ImGui::BeginTabItem((const char*)u8"雷达")) {
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
-			if (ImGui::Checkbox("Show Radar", &State.ShowRadar)) {
+			if (ImGui::Checkbox((const char*)u8"绘制雷达", &State.ShowRadar)) {
 				State.Save();
 			}
 			ImGui::SameLine();
@@ -20,13 +20,13 @@ namespace RadarTab {
 			ImGui::Separator();
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 
-			if (ImGui::Checkbox("Show Dead Bodies", &State.ShowRadar_DeadBodies)) {
+			if (ImGui::Checkbox((const char*)u8"绘制尸体", &State.ShowRadar_DeadBodies)) {
 				State.Save();
 			}
-			if (ImGui::Checkbox("Show Ghosts", &State.ShowRadar_Ghosts)) {
+			if (ImGui::Checkbox((const char*)u8"绘制幽灵", &State.ShowRadar_Ghosts)) {
 				State.Save();
 			}
-			if (ImGui::Checkbox("Right Click to Teleport", &State.ShowRadar_RightClick_Teleport)) {
+			if (ImGui::Checkbox((const char*)u8"右键点击传送", &State.ShowRadar_RightClick_Teleport)) {
 				State.Save();
 			}
 
@@ -34,13 +34,13 @@ namespace RadarTab {
 			ImGui::Separator();
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 
-			if (ImGui::Checkbox("Hide Radar During Meetings", &State.HideRadar_During_Meetings)) {
+			if (ImGui::Checkbox((const char*)u8"会议期间隐藏雷达", &State.HideRadar_During_Meetings)) {
 				State.Save();
 			}
-			if (ImGui::Checkbox("Draw Player Icons", &State.RadarDrawIcons)) {
+			if (ImGui::Checkbox((const char*)u8"绘制玩家图标", &State.RadarDrawIcons)) {
 				State.Save();
 			}
-			if (ImGui::Checkbox("Lock Radar Position", &State.LockRadar)) {
+			if (ImGui::Checkbox((const char*)u8"锁定雷达位置", &State.LockRadar)) {
 				State.Save();
 			}
 			if (ImGui::ColorEdit4("Radar Color",

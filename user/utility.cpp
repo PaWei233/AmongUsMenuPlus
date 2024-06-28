@@ -1,4 +1,4 @@
-#include "pch-il2cpp.h"
+﻿#include "pch-il2cpp.h"
 #include "utility.h"
 #include "state.hpp"
 #include "game.h"
@@ -425,7 +425,20 @@ const char* TranslateTaskTypes(TaskTypes__Enum taskType) {
 		"Hoist Supplies", "Mine Ores", "Polish Gem", "Replace Parts", "Help Critter", "Crank Generator", "Fix Antenna", "Find Signal", "Mushroom Mixup Sabotage", 
 		"Extract Fuel", "Monitor Mushroom", "Play Video Game",
 	};
-	return TASK_TRANSLATIONS.at(static_cast<size_t>(taskType));
+	// 已修改，汉化文本
+	static std::array TASK_TRANSLATIONS_CHINESE = { (const char*)u8"提交扫描",(const char*)u8"启动防护罩",(const char*)u8"加注燃料",(const char*)u8"绘制航线",(const char*)u8"启动反应堆",(const char*)u8"刷卡",(const char*)u8"清除小行星",(const char*)u8"上传数据",
+		(const char*)u8"检查样本",(const char*)u8"清空降落伞",(const char*)u8"清空垃圾",(const char*)u8"校准引擎输出",(const char*)u8"修复线路",(const char*)u8"校准分配器",(const char*)u8"转移动力",(const char*)u8"解锁歧管",(const char*)u8"重置反应堆",
+		(const char*)u8"修复照明",(const char*)u8"清洁氧气过滤器",(const char*)u8"修复通信",(const char*)u8"恢复氧气",(const char*)u8"稳定转向",(const char*)u8"组装人工制品",(const char*)u8"整理样本",(const char*)u8"测量天气",(const char*)u8"输入 ID 代码",
+		(const char*)u8"购买饮料",(const char*)u8"处理数据",(const char*)u8"运行诊断程序",(const char*)u8"水厂",(const char*)u8"监测氧气",(const char*)u8"存储人工制品",(const char*)u8"填充罐",(const char*)u8"激活气象节点",(const char*)u8"插入钥匙",
+		(const char*)u8"重置地震稳定器",(const char*)u8"扫描登船口",(const char*)u8"打开水道",(const char*)u8"更换水壶",(const char*)u8"修复钻井",(const char*)u8"校准遥感",(const char*)u8"记录温度",(const char*)u8"重启 Wifi",
+		(const char*)u8"擦亮红宝石",(const char*)u8"重置断路器",(const char*)u8"消除污染",(const char*)u8"制作汉堡",(const char*)u8"解锁保险箱",(const char*)u8"整理记录",(const char*)u8"收起手枪",(const char*)u8"修理淋浴间",(const char*)u8"清洁厕所",(const char*)u8"为人体模型穿衣",
+		(const char*)u8"拾取毛巾",(const char*)u8"倒带",(const char*)u8"启动风扇",(const char*)u8"冲洗照片",(const char*)u8"获取比戈尔剑",(const char*)u8"收起步枪",(const char*)u8"停止查尔斯",(const char*)u8"清洁通风口",(const char*)u8"无",
+		// 2023.10.24 新增
+		(const char*)u8"堆沙堡",(const char*)u8"抓鱼",(const char*)u8"收集贝壳",(const char*)u8"举重",(const char*)u8"烤棉花糖",(const char*)u8"扔飞盘",(const char*)u8"收集样本",(const char*)u8"收集蔬菜",
+		(const char*)u8"提升物资",(const char*)u8"开采矿石",(const char*)u8"打磨宝石",(const char*)u8"更换零件",(const char*)u8"帮助小动物",(const char*)u8"摇动发电机",(const char*)u8"修复天线",(const char*)u8"寻找信号",(const char*)u8"蘑菇混合破坏",
+		(const char*)u8"提取燃料",(const char*)u8"监控蘑菇",(const char*)u8"玩电子游戏",
+	};
+	return TASK_TRANSLATIONS_CHINESE.at(static_cast<size_t>(taskType));
 }
 
 const char* TranslateSystemTypes(SystemTypes__Enum systemType) {
@@ -437,7 +450,16 @@ const char* TranslateSystemTypes(SystemTypes__Enum systemType) {
 		// 2023.10.24 added
 		"Zipline", "Mining Pit", "Fishing Dock", "Rec Room", "Lookout", "Beach", "Highlands", "Jungle", "Sleeping Quarters", "Mushroom Mixup Sabotage", "Heli Sabotage",
 	};
-	return SYSTEM_TRANSLATIONS.at(static_cast<size_t>(systemType));
+	// 已修改，汉化文本
+	static std::array SYSTEM_TRANSLATIONS_CHINESE = { (const char*)u8"走廊",(const char*)u8"储藏室",(const char*)u8"餐厅",(const char*)u8"反应堆",(const char*)u8"上层引擎",(const char*)u8"导航",(const char*)u8"管理",(const char*)u8"电气",(const char*)u8"氧气",(const char*)u8"防护罩",
+		(const char*)u8"医疗舱",(const char*)u8"安全",(const char*)u8"武器",(const char*)u8"下层引擎",(const char*)u8"通讯",(const char*)u8"飞船任务",(const char*)u8"门",(const char*)u8"破坏",(const char*)u8"净化",(const char*)u8"发射台",(const char*)u8"更衣室",(const char*)u8"实验室",
+		(const char*)u8"阳台",(const char*)u8"办公室",(const char*)u8"温室",(const char*)u8"飞船",(const char*)u8"净化",(const char*)u8"室外",(const char*)u8"标本室",(const char*)u8"锅炉房",(const char*)u8"保险库",(const char*)u8"驾驶舱",(const char*)u8"军械库",(const char*)u8"厨房",(const char*)u8"观景台",
+		(const char*)u8"肖像厅",(const char*)u8"货舱",(const char*)u8"通风",(const char*)u8"淋浴",(const char*)u8"引擎室",(const char*)u8"旅舍",(const char*)u8"会议室",(const char*)u8"记录室",(const char*)u8"休息室",(const char*)u8"空隙室",(const char*)u8"主厅",(const char*)u8"医疗室",
+		(const char*)u8"净化",
+		// 2023.10.24 新增
+		(const char*)u8"滑索",(const char*)u8"矿坑",(const char*)u8"渔码头",(const char*)u8"娱乐室",(const char*)u8"瞭望台",(const char*)u8"海滩",(const char*)u8"高地",(const char*)u8"丛林",(const char*)u8"睡眠区",(const char*)u8"蘑菇混合破坏",(const char*)u8"直升机破坏",
+	};
+	return SYSTEM_TRANSLATIONS_CHINESE.at(static_cast<size_t>(systemType));
 }
 
 Color32 GetPlayerColor(Game::ColorId colorId) {

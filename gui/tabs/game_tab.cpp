@@ -8,16 +8,16 @@
 
 namespace GameTab {
 	void Render() {
-		if (ImGui::BeginTabItem("Game")) {
+		if (ImGui::BeginTabItem((const char*)u8"游戏")) {
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
-			if (SteppedSliderFloat("Player Speed", &State.PlayerSpeed, 0.5f, 3.f, 0.25f, "%.2fx", ImGuiSliderFlags_Logarithmic | ImGuiSliderFlags_NoInput)) {
+			if (SteppedSliderFloat((const char*)u8"玩家速度", &State.PlayerSpeed, 0.5f, 3.f, 0.25f, "%.2fx", ImGuiSliderFlags_Logarithmic | ImGuiSliderFlags_NoInput)) {
 				if (!IsInGame()) State.PlayerSpeed = State.PrevPlayerSpeed;
 				else {
 					GameLogicOptions().SetFloat(app::FloatOptionNames__Enum::PlayerSpeedMod, State.PlayerSpeed);
 					State.PrevPlayerSpeed = State.PlayerSpeed;
 				}
 			}
-			if (CustomListBoxInt("Kill Distance", &State.KillDistance, KILL_DISTANCE, 225 * State.dpiScale)) {
+			if (CustomListBoxInt((const char*)u8"击杀距离", &State.KillDistance, KILL_DISTANCE_CHINESE, 225 * State.dpiScale)) {
 				if (!IsInGame()) State.KillDistance = State.PrevKillDistance;
 				else {
 					GameLogicOptions().SetInt(app::Int32OptionNames__Enum::KillDistance, State.KillDistance);
@@ -25,7 +25,7 @@ namespace GameTab {
 				}
 			}
 			if (GameOptions().GetGameMode() == GameModes__Enum::Normal) {
-				if (CustomListBoxInt("Task Bar Updates", &State.TaskBarUpdates, TASKBARUPDATES, 225 * State.dpiScale)) {
+				if (CustomListBoxInt((const char*)u8"更新任务栏", &State.TaskBarUpdates, TASKBARUPDATES_CHINESE, 225 * State.dpiScale)) {
 					if (!IsInGame()) State.TaskBarUpdates = State.PrevTaskBarUpdates;
 					else {
 						GameLogicOptions().SetInt(app::Int32OptionNames__Enum::TaskBarMode, State.TaskBarUpdates);
@@ -38,7 +38,7 @@ namespace GameTab {
 			ImGui::Separator();
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 			
-			if (ImGui::Button("Set Color") && (IsInGame() || IsInLobby()))
+			if (ImGui::Button((const char*)u8"设置颜色") && (IsInGame() || IsInLobby()))
 			{
 				bool colorAvailable = true;
 
@@ -62,23 +62,23 @@ namespace GameTab {
 			}
 
 			ImGui::SameLine(87 * State.dpiScale);
-			CustomListBoxInt(" ", &State.SelectedColorId, COLORS, 85.0f * State.dpiScale);
+			CustomListBoxInt(" ", &State.SelectedColorId, COLORS_CHINESE, 85.0f * State.dpiScale);
 
 			ImGui::SameLine(215 * State.dpiScale);
-			if (ImGui::Button("Random Color"))
+			if (ImGui::Button((const char*)u8"随机颜色"))
 			{
 				State.SelectedColorId = GetRandomColorId();
 			}
 
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 
-			if (ImGui::Checkbox("Console", &State.ShowConsole)) {
+			if (ImGui::Checkbox((const char*)u8"控制台", &State.ShowConsole)) {
 				State.Save();
 			}
 
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 
-			if (ImGui::Checkbox("AUM Chat", &State.ShowChat)) {
+			if (ImGui::Checkbox((const char*)u8"AUM聊天", &State.ShowChat)) {
 				State.Save();
 			}
 
@@ -91,7 +91,7 @@ namespace GameTab {
 
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 
-			if ((State.mapType == Settings::MapType::Airship) && IsHost() && IsInGame() && ImGui::Button("Switch Moving Platform Side"))
+			if ((State.mapType == Settings::MapType::Airship) && IsHost() && IsInGame() && ImGui::Button((const char*)u8"切换移动平台侧"))
 			{
 				State.rpcQueue.push(new RpcUsePlatform());
 			}

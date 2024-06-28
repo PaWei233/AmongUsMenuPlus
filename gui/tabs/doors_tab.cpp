@@ -12,7 +12,7 @@ namespace DoorsTab {
 	void Render() {
 		GameOptions options;
 		if (IsInGame() && !State.mapDoors.empty() && options.GetGameMode() != GameModes__Enum::HideNSeek) {
-			if (ImGui::BeginTabItem("Doors")) {
+			if (ImGui::BeginTabItem((const char*)u8"门")) {
 				ImGui::BeginChild("doors#list", ImVec2(200, 0) * State.dpiScale, true);
 				bool shouldEndListBox = ImGui::ListBoxHeader("###doors#list", ImVec2(200, 150) * State.dpiScale);
 				for (auto systemType : State.mapDoors) {
@@ -59,7 +59,7 @@ namespace DoorsTab {
 				ImGui::SameLine();
 				ImGui::BeginChild("doors#options", ImVec2(200, 0) * State.dpiScale);
 
-				if (ImGui::Button("Close All Doors"))
+				if (ImGui::Button((const char*)u8"关闭所有门"))
 				{
 					for(auto door : State.mapDoors)
 					{
@@ -71,7 +71,7 @@ namespace DoorsTab {
 					State.Save();
 				}
 
-				if (ImGui::Button("Close Room Door"))
+				if (ImGui::Button((const char*)u8"关闭当前房间门"))
 				{
 					State.rpcQueue.push(new RpcCloseDoorsOfType(GetSystemTypes(GetTrueAdjustedPosition(*Game::pLocalPlayer)), false));
 				}
@@ -80,7 +80,7 @@ namespace DoorsTab {
 					State.Save();
 				}
 
-				if (ImGui::Button("Pin All Doors"))
+				if (ImGui::Button((const char*)u8"锁所有门"))
 				{
 					for (auto door : State.mapDoors)
 					{
@@ -93,23 +93,23 @@ namespace DoorsTab {
 						}
 					}
 				}
-				if (ImGui::Button("Unpin All Doors"))
+				if (ImGui::Button((const char*)u8"解锁所有门"))
 				{
 					State.pinnedDoors.clear();
 				}
 				ImGui::NewLine();
 				if (State.selectedDoor != SystemTypes__Enum::Hallway) {
-					if (ImGui::Button("Close Door")) {
+					if (ImGui::Button((const char*)u8"关门")) {
 						State.rpcQueue.push(new RpcCloseDoorsOfType(State.selectedDoor, false));
 					}
 
 					if (std::find(State.pinnedDoors.begin(), State.pinnedDoors.end(), State.selectedDoor) == State.pinnedDoors.end()) {
-						if (ImGui::Button("Pin Door")) {
+						if (ImGui::Button((const char*)u8"锁门")) {
 							State.rpcQueue.push(new RpcCloseDoorsOfType(State.selectedDoor, true));
 						}
 					}
 					else {
-						if (ImGui::Button("Unpin Door")) {
+						if (ImGui::Button((const char*)u8"解锁门")) {
 							State.pinnedDoors.erase(std::remove(State.pinnedDoors.begin(), State.pinnedDoors.end(), State.selectedDoor), State.pinnedDoors.end());
 						}
 					}
@@ -118,7 +118,7 @@ namespace DoorsTab {
 					|| State.mapType == Settings::MapType::Fungle)
 				{
 					ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
-					if (ImGui::Checkbox("Auto Open Doors", &State.AutoOpenDoors)) {
+					if (ImGui::Checkbox((const char*)u8"自动开门", &State.AutoOpenDoors)) {
 						State.Save();
 					}
 				}

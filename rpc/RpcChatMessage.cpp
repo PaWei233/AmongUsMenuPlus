@@ -12,6 +12,10 @@ RpcChatMessage::RpcChatMessage(std::string senderName, std::string message, uint
 }
 
 void RpcChatMessage::Process() {
+	if (State.ModMode)	// 已修改，Mod模式禁用RPC外挂消息
+	{
+		return;
+	}
 	MessageWriter* rpcMessage = InnerNetClient_StartRpc((InnerNetClient*)(*Game::pAmongUsClient), (*Game::pLocalPlayer)->fields._.NetId, 101, (SendOption__Enum)1, NULL);
 	MessageWriter_WriteString(rpcMessage, convert_to_string(this->SenderName), NULL);
 	MessageWriter_WriteString(rpcMessage, convert_to_string(this->Message), NULL);

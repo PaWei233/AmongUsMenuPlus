@@ -13,16 +13,16 @@ namespace EspTab {
 		bool changed = false;
 		if (ImGui::BeginTabItem("Esp")) {
 
-			changed |= ImGui::Checkbox("Enable", &State.ShowEsp);
+			changed |= ImGui::Checkbox((const char*)u8"启用", &State.ShowEsp);
 
-			changed |= ImGui::Checkbox("Show Ghosts", &State.ShowEsp_Ghosts);
-			changed |= ImGui::Checkbox("Hide During Meetings", &State.HideEsp_During_Meetings);
+			changed |= ImGui::Checkbox((const char*)u8"绘制幽灵", &State.ShowEsp_Ghosts);
+			changed |= ImGui::Checkbox((const char*)u8"会议期间隐藏", &State.HideEsp_During_Meetings);
 
-			changed |= ImGui::Checkbox("Show Box", &State.ShowEsp_Box);
-			changed |= ImGui::Checkbox("Show Tracers", &State.ShowEsp_Tracers);
-			changed |= ImGui::Checkbox("Show Distance", &State.ShowEsp_Distance);
+			changed |= ImGui::Checkbox((const char*)u8"绘制方框", &State.ShowEsp_Box);
+			changed |= ImGui::Checkbox((const char*)u8"绘制追踪线", &State.ShowEsp_Tracers);
+			changed |= ImGui::Checkbox((const char*)u8"绘制距离", &State.ShowEsp_Distance);
 
-			changed |= ImGui::Checkbox("Role-based", &State.ShowEsp_RoleBased);
+			changed |= ImGui::Checkbox((const char*)u8"基于身份", &State.ShowEsp_RoleBased);
 
 			ImGui::EndTabItem();
 		}

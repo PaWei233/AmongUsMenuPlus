@@ -17,9 +17,9 @@ namespace HostTab {
 
 	void Render() {
 		if (IsHost() && IsInLobby()) {
-			if (ImGui::BeginTabItem("Host")) {
+			if (ImGui::BeginTabItem((const char*)u8"主机")) {
 				GameOptions options;
-				ImGui::Text("Select Roles:");
+				ImGui::Text((const char*)u8"选择身份：");
 				ImGui::BeginChild("host#list", ImVec2(200, 0) * State.dpiScale, true);
 				bool shouldEndListBox = ImGui::ListBoxHeader("Choose Roles", ImVec2(200, 150) * State.dpiScale);
 				auto allPlayers = GetAllPlayerData();
@@ -36,7 +36,7 @@ namespace HostTab {
 					app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(playerData);
 					if (outfit == NULL) continue;
 					const std::string& playerName = convert_from_string(GameData_PlayerOutfit_get_PlayerName(outfit, nullptr));
-					if (CustomListBoxInt(playerName.c_str(), reinterpret_cast<int*>(&State.assignedRoles[index]), ROLE_NAMES, 80 * State.dpiScale))
+					if (CustomListBoxInt(playerName.c_str(), reinterpret_cast<int*>(&State.assignedRoles[index]), ROLE_NAMES_CHINESE, 80 * State.dpiScale))
 					{
 						State.engineers_amount = (int)GetRoleCount(RoleType::Engineer);
 						State.scientists_amount = (int)GetRoleCount(RoleType::Scientist);
@@ -88,7 +88,7 @@ namespace HostTab {
 				if (State.mapHostChoice > 3)
 					State.mapHostChoice--;
 				State.mapHostChoice = std::clamp(State.mapHostChoice, 0, (int)MAP_NAMES.size()-1);
-				if (CustomListBoxInt("Map", &State.mapHostChoice, MAP_NAMES, 75 * State.dpiScale)) {
+				if (CustomListBoxInt((const char*)u8"地图", &State.mapHostChoice, MAP_NAMES, 75 * State.dpiScale)) {
 					if (!IsInGame()) {
 						// disable flip
 						/*if (State.mapHostChoice == 3) {
@@ -105,7 +105,7 @@ namespace HostTab {
 					}
 				}
 				ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
-				if (IsInLobby() && ImGui::Button("Force Start of Game"))
+				if (IsInLobby() && ImGui::Button((const char*)u8"强制开始游戏"))
 				{
 					app::InnerNetClient_SendStartGame((InnerNetClient*)(*Game::pAmongUsClient), NULL);
 				}
