@@ -140,12 +140,13 @@ void dMeetingHud_Update(MeetingHud* __this, MethodInfo* method) {
 		auto playerData = GetPlayerDataById(playerVoteArea->fields.TargetPlayerId);
 		if (!State.ModMode)	// 已修改，Mod模式下不修改会议名字
 		{
+			
 			auto localData = GetPlayerData(*Game::pLocalPlayer);
 			auto playerNameTMP = playerVoteArea->fields.NameText;
-			app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(playerData);
+			auto outfit = GetPlayerOutfit(playerData);
 
 			if (playerData && localData && outfit) {
-				std::string playerName = convert_from_string(GameData_PlayerOutfit_get_PlayerName(outfit, nullptr));
+				std::string playerName = convert_from_string(outfit->fields.PlayerName);
 				if (State.RevealRoles)
 				{
 					std::string roleName = GetRoleName(playerData->fields.Role, State.AbbreviatedRoleNames);
