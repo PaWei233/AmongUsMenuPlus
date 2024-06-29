@@ -1,2 +1,2 @@
-#define GIT_CUR_COMMIT placeholder
-#define GIT_BRANCH placeholder
+#define GIT_CUR_COMMIT b99ea4e21ae016a4e6254970c65a391b79a1829a
+#define GIT_BRANCH 2022.2.24s

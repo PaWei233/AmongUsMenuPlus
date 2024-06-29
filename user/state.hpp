@@ -153,6 +153,7 @@ public:
     int LobbyTimer = -1;
 
     std::string userName = "";
+    bool SetUserName = false;   // 已修改，设置用户名
 
     enum MapType : uint8_t
     {
@@ -174,6 +175,8 @@ public:
 
     void Load();
     void Save();
+
+    bool ModMode = false;   // 已修改，Mod模式
 };
 
 extern Settings State;

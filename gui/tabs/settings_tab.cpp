@@ -38,6 +38,14 @@ namespace SettingsTab {
 				}
 			}
 
+			ImGui::SameLine();
+			if (ImGui::Button((const char*)u8"设置名字"))
+			{
+				State.SetUserName = true;
+			}
+
+			ImGui::Checkbox((const char*)u8"mod模式", &State.ModMode); //已修改，Mod模式选择框
+
 			ImGui::Dummy(ImVec2(7, 7));
 			ImGui::Separator();
 			ImGui::Dummy(ImVec2(7, 7));

@@ -18,6 +18,7 @@
 #include "game.h"
 #include "console.hpp"
 #include "profiler.h"
+#include "NotoSansSCMedium.hpp"
 
 #include <future>
 
@@ -112,7 +113,8 @@ bool ImGuiInitialization(IDXGISwapChain* pSwapChain) {
         ImGuiIO& io = ImGui::GetIO();
         io.Fonts->ClearFonts();
         ImFontConfig config;
-        io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 14, &config, io.Fonts->GetGlyphRangesCyrillic());
+        //io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 14, &config, io.Fonts->GetGlyphRangesCyrillic());
+        io.Fonts->AddFontFromMemoryCompressedTTF((void*)NotoSansSCMedium_compressed_data, NotoSansSCMedium_compressed_size, 16, nullptr, io.Fonts->GetGlyphRangesChineseFull());    // 已修改，内存加载字体
         io.Fonts->Build();
         io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
         ImGui_ImplWin32_Init(window);

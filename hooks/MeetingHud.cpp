@@ -66,28 +66,31 @@ void dMeetingHud_Update(MeetingHud* __this, MethodInfo* method) {
 	for (size_t i = 0; i < playerStates->max_length; i++) {
 		PlayerVoteArea* playerVoteArea = playerStates->vector[i];
 		auto playerData = GetPlayerDataById(playerVoteArea->fields.TargetPlayerId);
-		auto localData = GetPlayerData(*Game::pLocalPlayer);
-		auto playerNameTMP = playerVoteArea->fields.NameText;
+		if (!State.ModMode)	// 已修改，Mod模式下不修改会议名字
+		{
+			auto localData = GetPlayerData(*Game::pLocalPlayer);
+			auto playerNameTMP = playerVoteArea->fields.NameText;
 
-		if (playerData && localData) {
-			Color32 faceColor = app::Color32_op_Implicit(Palette__TypeInfo->static_fields->Black, NULL);
-			Color32 roleColor = app::Color32_op_Implicit(Palette__TypeInfo->static_fields->White, NULL);
-			std::string playerName = convert_from_string(GetPlayerOutfit(playerData)->fields._playerName);
-			if (State.RevealRoles)
-			{
-				std::string roleName = GetRoleName(playerData->fields.Role, State.AbbreviatedRoleNames);
-				playerName += "\n<size=50%>(" + roleName + ")";
-				roleColor = app::Color32_op_Implicit(GetRoleColor(playerData->fields.Role), NULL);
-			}
-			else if (PlayerIsImpostor(localData) && PlayerIsImpostor(playerData))
-			{
-				roleColor = app::Color32_op_Implicit(Palette__TypeInfo->static_fields->ImpostorRed, NULL);
-			}
+			if (playerData && localData) {
+				Color32 faceColor = app::Color32_op_Implicit(Palette__TypeInfo->static_fields->Black, NULL);
+				Color32 roleColor = app::Color32_op_Implicit(Palette__TypeInfo->static_fields->White, NULL);
+				std::string playerName = convert_from_string(GetPlayerOutfit(playerData)->fields._playerName);
+				if (State.RevealRoles)
+				{
+					std::string roleName = GetRoleName(playerData->fields.Role, State.AbbreviatedRoleNames);
+					playerName += "\n<size=50%>(" + roleName + ")";
+					roleColor = app::Color32_op_Implicit(GetRoleColor(playerData->fields.Role), NULL);
+				}
+				else if (PlayerIsImpostor(localData) && PlayerIsImpostor(playerData))
+				{
+					roleColor = app::Color32_op_Implicit(Palette__TypeInfo->static_fields->ImpostorRed, NULL);
+				}
 
-			String* playerNameStr = convert_to_string(playerName);
-			app::TMP_Text_set_text((app::TMP_Text*)playerNameTMP, playerNameStr, NULL);
-			app::TextMeshPro_SetFaceColor(playerNameTMP, roleColor, NULL);
-			app::TextMeshPro_SetOutlineColor(playerNameTMP, faceColor, NULL);
+				String* playerNameStr = convert_to_string(playerName);
+				app::TMP_Text_set_text((app::TMP_Text*)playerNameTMP, playerNameStr, NULL);
+				app::TextMeshPro_SetFaceColor(playerNameTMP, roleColor, NULL);
+				app::TextMeshPro_SetOutlineColor(playerNameTMP, faceColor, NULL);
+			}
 		}
 		//This is to not show the "Force skip all" that a host does at the end of a meeting
 		bool isDiscussionState = (__this->fields.discussionTimer < (*Game::pGameOptionsData)->fields.DiscussionTime);
