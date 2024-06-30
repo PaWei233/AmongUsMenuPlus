@@ -54,8 +54,8 @@ static const std::map<uint8_t, const char*> KeyMap = {
     {0x58, "X"},
     {0x59, "Y"},
     {0x5A, "Z"},
-    {0x5B, "WINDOWS"},
-    {0x5C, "WINDOWS"},
+    /*{0x5B, "WINDOWS"},
+    {0x5C, "WINDOWS"},*/
     {0x60, "NUM 0"},
     {0x61, "NUM 1"},
     {0x62, "NUM 2"},
