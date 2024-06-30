@@ -7,7 +7,7 @@
 
 namespace SelfTab {
     void Render() {
-        if (ImGui::BeginTabItem("Self")) {
+        if (ImGui::BeginTabItem("自己")) {
             ImGui::Dummy(ImVec2(4, 4));
             if (ImGui::Checkbox("Max Vision", &State.MaxVision)) {
                 State.Save();

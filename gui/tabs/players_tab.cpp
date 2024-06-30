@@ -11,7 +11,7 @@ namespace PlayersTab {
 
 	void Render() {
 		if (IsInGame() || IsInLobby()) {
-			if (ImGui::BeginTabItem("Players")) {
+			if (ImGui::BeginTabItem("Íæ¼ÒÃÇ")) {
 				ImGui::BeginChild("players#list", ImVec2(200, 0), true);
 				ImGui::ListBoxHeader("", ImVec2(200, 150));
 				auto localData = GetPlayerData(*Game::pLocalPlayer);
