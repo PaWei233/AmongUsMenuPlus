@@ -8,7 +8,7 @@
 
 namespace SettingsTab {
 	void Render() {
-		if (ImGui::BeginTabItem("…Ë÷√")) {
+		if (ImGui::BeginTabItem((const char*)u8"…Ë÷√")) {
 			ImGui::Dummy(ImVec2(4, 4));
 			ImGui::Text("Show/Hide Menu Keybind:");
 			ImGui::SameLine();
