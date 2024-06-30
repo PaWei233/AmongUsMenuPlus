@@ -6,7 +6,7 @@
 
 namespace ReplayTab {
 	void Render() {
-		if (ImGui::BeginTabItem("ÖØ²¥")) {
+		if (ImGui::BeginTabItem((const char*)u8"ÖØ²¥")) {
 			ImGui::Dummy(ImVec2(4, 4));
 			if (ImGui::Checkbox("Show Replay", &State.ShowReplay)) {
 				State.Save();

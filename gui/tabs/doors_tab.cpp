@@ -9,7 +9,7 @@
 namespace DoorsTab {
 	void Render() {
 		if (IsInGame() && !State.mapDoors.empty()) {
-			if (ImGui::BeginTabItem("所有门")) {
+			if (ImGui::BeginTabItem((const char*)u8"所有门")) {
 				ImGui::BeginChild("doors#list", ImVec2(200, 0), true);
 				ImGui::ListBoxHeader("", ImVec2(200, 150));
 				for (size_t i = 0; i < State.mapDoors.size(); i++) {

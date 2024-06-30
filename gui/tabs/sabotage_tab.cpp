@@ -9,7 +9,7 @@
 namespace SabotageTab {
     void Render() {
         if (IsInGame()) {
-            if (ImGui::BeginTabItem("ÆÆ»µ")) {
+            if (ImGui::BeginTabItem((const char*)u8"ÆÆ»µ")) {
                 ImGui::Dummy(ImVec2(4, 4));
                 if (ImGui::Button("Repair Sabotage")) {
                     RepairSabotage(*Game::pLocalPlayer);

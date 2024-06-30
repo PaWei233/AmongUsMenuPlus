@@ -8,7 +8,7 @@
 namespace HostTab {
 	void Render() {
 		if (IsHost() && IsInLobby()) {
-			if (ImGui::BeginTabItem("主持人")) {
+			if (ImGui::BeginTabItem((const char*)u8"主持人")) {
 				ImGui::Text("Select Roles:");
 				ImGui::BeginChild("host#list", ImVec2(200, 0), true);
 				ImGui::ListBoxHeader("Choose Roles", ImVec2(200, 150));
