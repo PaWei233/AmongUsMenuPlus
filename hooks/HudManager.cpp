@@ -61,6 +61,7 @@ void dHudManager_Update(HudManager* __this, MethodInfo* method) {
 void dVersionShower_Start(VersionShower* __this, MethodInfo* method) {
 	VersionShower_Start(__this, method);
 	std::string versionText = convert_from_string(__this->fields.text->fields._.m_text);
-	versionText = versionText + "\n AmongUsMenu - " + GetGitBranch();
+	//versionText = versionText + "\n AmongUsMenu - " + GetGitBranch();
+	versionText = versionText + (const char*)u8"\n ÂåÐ¡ÂúÊÇ¸öÆæ¼£";
 	__this->fields.text->fields._.m_text = convert_to_string(versionText);
 }
