@@ -21,6 +21,7 @@
 #include "console.hpp"
 #include "aum-chat.hpp"
 #include "profiler.h"
+#include "NotoSansSCMedium.hpp"
 
 #include <future>
 
@@ -119,6 +120,22 @@ LRESULT __stdcall dWndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Replay)) State.ShowReplay = !State.ShowReplay;
     if (KeyBinds::IsKeyPressed(State.KeyBinds.Toggle_Chat)) State.ShowChat = !State.ShowChat;
 
+    if (ImGui::GetIO().WantCaptureMouse)
+    {
+        switch (uMsg) {
+        case WM_LBUTTONDOWN: case WM_LBUTTONDBLCLK:
+        case WM_RBUTTONDOWN: case WM_RBUTTONDBLCLK:
+        case WM_MBUTTONDOWN: case WM_MBUTTONDBLCLK:
+        case WM_XBUTTONDOWN: case WM_XBUTTONDBLCLK:
+        case WM_LBUTTONUP:
+        case WM_RBUTTONUP:
+        case WM_MBUTTONUP:
+        case WM_XBUTTONUP:
+        case WM_MOUSEWHEEL:
+            return true;
+        }
+    }
+
     return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
@@ -180,7 +197,8 @@ bool ImGuiInitialization(IDXGISwapChain* pSwapChain) {
 static void RebuildFont() {
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->Clear();
-    io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 14 * State.dpiScale, nullptr, io.Fonts->GetGlyphRangesCyrillic());
+    //io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\Arial.ttf", 14 * State.dpiScale, nullptr, io.Fonts->GetGlyphRangesCyrillic());
+    io.Fonts->AddFontFromMemoryCompressedTTF((void*)NotoSansSCMedium_compressed_data, NotoSansSCMedium_compressed_size, 16, nullptr, io.Fonts->GetGlyphRangesChineseFull());    // 已修改，内存加载字体
     do {
         const ImWchar* glyph_ranges;
         wchar_t locale[LOCALE_NAME_MAX_LENGTH] = { 0 };

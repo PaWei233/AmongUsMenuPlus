@@ -110,19 +110,22 @@ void dInnerNetClient_Update(InnerNetClient* __this, MethodInfo* method)
 
     static int nameChangeCycleDelay = 0; //If we spam too many name changes, we're banned
 
-    if (nameChangeCycleDelay <= 0 && !State.activeImpersonation) {
-        if ((GetPlayerName() != State.userName) && !State.userName.empty()) {
-            SetPlayerName(State.userName);
-            LOG_INFO("Name mismatch, setting name to \"" + State.userName + "\"");
-            if (IsInGame())
-                State.rpcQueue.push(new RpcSetName(State.userName));
-            else if (IsInLobby())
-                State.lobbyRpcQueue.push(new RpcSetName(State.userName));
-            nameChangeCycleDelay = 100; //Should be approximately two second
+    if (State.SetUserName)  // 已修改，按下按钮后修改用户名
+    {
+        if (nameChangeCycleDelay <= 0 && !State.activeImpersonation) {
+            if ((GetPlayerName() != State.userName) && !State.userName.empty()) {
+                SetPlayerName(State.userName);
+                LOG_INFO("Name mismatch, setting name to \"" + State.userName + "\"");
+                if (IsInGame())
+                    State.rpcQueue.push(new RpcSetName(State.userName));
+                else if (IsInLobby())
+                    State.lobbyRpcQueue.push(new RpcSetName(State.userName));
+                nameChangeCycleDelay = 100; //Should be approximately two second
+            }
         }
-    }
-    else {
-        nameChangeCycleDelay--;
+        else {
+            nameChangeCycleDelay--;
+        }
     }
     // Right-click Teleport
     if (IsInGame() && State.RightClickTeleport && ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {

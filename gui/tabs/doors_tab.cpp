@@ -12,7 +12,7 @@ namespace DoorsTab {
 	void Render() {
 		GameOptions options;
 		if (IsInGame() && !State.mapDoors.empty() && options.GetGameMode() != GameModes__Enum::HideNSeek) {
-			if (ImGui::BeginTabItem("Doors")) {
+			if (ImGui::BeginTabItem((const char*)u8"À˘”–√≈")) {
 				ImGui::BeginChild("doors#list", ImVec2(200, 0) * State.dpiScale, true);
 				bool shouldEndListBox = ImGui::ListBoxHeader("###doors#list", ImVec2(200, 150) * State.dpiScale);
 				for (auto systemType : State.mapDoors) {

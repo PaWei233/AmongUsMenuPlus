@@ -501,6 +501,9 @@
     <ClInclude Include="user\DestroyableSingleton.h">
       <Filter>user</Filter>
     </ClInclude>
+    <ClInclude Include="resources\NotoSansSCMedium.hpp">
+      <Filter>resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\mira_hq.png">

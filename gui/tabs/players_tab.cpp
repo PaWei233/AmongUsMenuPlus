@@ -12,7 +12,7 @@ namespace PlayersTab {
 
 	void Render() {
 		if (IsInGame() || IsInLobby()) {
-			if (ImGui::BeginTabItem("Players")) {
+			if (ImGui::BeginTabItem((const char*)u8"ËùÓÐÍæ¼Ò")) {
 				ImGui::BeginChild("players#list", ImVec2(200, 0) * State.dpiScale, true);
 				auto selectedPlayer = State.selectedPlayer.validate();
 				bool shouldEndListBox = ImGui::ListBoxHeader("###players#list", ImVec2(200, 150) * State.dpiScale);

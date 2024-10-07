@@ -11,7 +11,7 @@
 
 namespace SettingsTab {
 	void Render() {
-		if (ImGui::BeginTabItem("Settings")) {
+		if (ImGui::BeginTabItem((const char*)u8"设置")) {
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 			ImGui::Text("Show/Hide Menu Keybind:");
 			ImGui::SameLine();
@@ -65,6 +65,14 @@ namespace SettingsTab {
 			if (State.userName.empty()) {
 				State.userName = GetPlayerName();
 			}
+
+			ImGui::SameLine();
+			if (ImGui::Button((const char*)u8"设置名字"))
+			{
+				State.SetUserName = true;
+			}
+
+			ImGui::Checkbox((const char*)u8"mod模式", &State.ModMode); //已修改，Mod模式选择框
 			
 			ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
 			ImGui::Separator();

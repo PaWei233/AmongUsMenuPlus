@@ -139,27 +139,30 @@ void dMeetingHud_Update(MeetingHud* __this, MethodInfo* method) {
 		}
 		auto playerData = GetPlayerDataById(playerVoteArea->fields.TargetPlayerId);
 		auto localData = GetPlayerData(*Game::pLocalPlayer);
-		auto playerNameTMP = playerVoteArea->fields.NameText;
-		app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(playerData);
+		if (!State.ModMode)	// 已修改，Mod模式下不修改会议名字
+		{
+			auto playerNameTMP = playerVoteArea->fields.NameText;
+			app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(playerData);
 
-		if (playerData && localData && outfit) {
-			std::string playerName = convert_from_string(GameData_PlayerOutfit_get_PlayerName(outfit, nullptr));
-			if (State.RevealRoles)
-			{
-				std::string roleName = GetRoleName(playerData->fields.Role, State.AbbreviatedRoleNames);
-				playerName += "\n<size=50%>(" + roleName + ")";
-				Color32&& roleColor = app::Color32_op_Implicit(GetRoleColor(playerData->fields.Role), NULL);
+			if (playerData && localData && outfit) {
+				std::string playerName = convert_from_string(GameData_PlayerOutfit_get_PlayerName(outfit, nullptr));
+				if (State.RevealRoles)
+				{
+					std::string roleName = GetRoleName(playerData->fields.Role, State.AbbreviatedRoleNames);
+					playerName += "\n<size=50%>(" + roleName + ")";
+					Color32&& roleColor = app::Color32_op_Implicit(GetRoleColor(playerData->fields.Role), NULL);
 
-				playerName = std::format("<color=#{:02x}{:02x}{:02x}{:02x}>{}",
-										 roleColor.r, roleColor.g, roleColor.b,
-										 roleColor.a, playerName);
-				if (IsColorBlindMode()) {
-					playerName += "\n ";
+					playerName = std::format("<color=#{:02x}{:02x}{:02x}{:02x}>{}",
+						roleColor.r, roleColor.g, roleColor.b,
+						roleColor.a, playerName);
+					if (IsColorBlindMode()) {
+						playerName += "\n ";
+					}
 				}
-			}
 
-			String* playerNameStr = convert_to_string(playerName);
-			app::TMP_Text_set_text((app::TMP_Text*)playerNameTMP, playerNameStr, NULL);
+				String* playerNameStr = convert_to_string(playerName);
+				app::TMP_Text_set_text((app::TMP_Text*)playerNameTMP, playerNameStr, NULL);
+			}
 		}
 
 		if (playerData)

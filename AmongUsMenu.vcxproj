@@ -358,6 +358,7 @@
     <ClInclude Include="includes\directx11.h" />
     <ClInclude Include="includes\detours\detours.h" />
     <ClInclude Include="framework\pch-il2cpp.h" />
+    <ClInclude Include="resources\NotoSansSCMedium.hpp" />
     <ClInclude Include="user\achievements.hpp" />
     <ClInclude Include="user\DestroyableSingleton.h" />
     <ClInclude Include="user\keybinds.h" />

@@ -17,7 +17,7 @@ namespace HostTab {
 
 	void Render() {
 		if (IsHost() && IsInLobby()) {
-			if (ImGui::BeginTabItem("Host")) {
+			if (ImGui::BeginTabItem((const char*)u8"Ö÷³ÖÈË")) {
 				GameOptions options;
 				ImGui::Text("Select Roles:");
 				ImGui::BeginChild("host#list", ImVec2(200, 0) * State.dpiScale, true);

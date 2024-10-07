@@ -10,7 +10,7 @@ extern void RevealAnonymousVotes(); // in MeetingHud.cpp
 
 namespace SelfTab {
     void Render() {
-        if (ImGui::BeginTabItem("Self")) {
+        if (ImGui::BeginTabItem((const char*)u8"×Ô¼º")) {
             ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
             if (ImGui::Checkbox("Max Vision", &State.MaxVision)) {
                 State.Save();

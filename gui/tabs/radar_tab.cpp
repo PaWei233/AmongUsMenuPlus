@@ -6,7 +6,7 @@
 
 namespace RadarTab {
 	void Render() {
-		if (ImGui::BeginTabItem("Radar")) {
+		if (ImGui::BeginTabItem((const char*)u8"À×´ï")) {
 			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 			if (ImGui::Checkbox("Show Radar", &State.ShowRadar)) {
 				State.Save();
