@@ -32,6 +32,7 @@ struct IconTexture {
 
 extern std::vector<MapTexture> maps;
 extern std::unordered_map<ICON_TYPES, IconTexture> icons;
+extern MapTexture GetMap(size_t Type);
 
 extern D3D_PRESENT_FUNCTION oPresent;
 HRESULT __stdcall dPresent(IDXGISwapChain* __this, UINT SyncInterval, UINT Flags);

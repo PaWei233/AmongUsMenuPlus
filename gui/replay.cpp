@@ -299,7 +299,8 @@ namespace Replay
 			}
 
 			IconTexture icon = icons.at(ICON_TYPES::PLAYER);
-			const auto& map = maps[(size_t)MapType];
+			//const auto& map = maps[(size_t)MapType];
+			const auto& map = GetMap((size_t)MapType);
 			// the latestPos variable is already pre-transformed for line rendering, so we have to un-transform and then re-transform for proper icon positioning
 			// existing transformation:
 			// latestPos.x = map.x_offset + (position.x * map.scale);
@@ -348,7 +349,8 @@ namespace Replay
 			return;
 		}
 
-		const auto& map = maps[(size_t)MapType];
+		//const auto& map = maps[(size_t)MapType];
+		const auto& map = GetMap((size_t)MapType);
 		
 		for (std::vector<std::unique_ptr<EventInterface>>::iterator it = State.liveReplayEvents.begin(); it != State.liveReplayEvents.end(); ++it)
 		{
@@ -461,7 +463,8 @@ namespace Replay
 		Profiler::BeginSample("ReplayRender");
 		Replay::Init();
 
-		const auto& map = maps[(size_t)State.mapType];
+		//const auto& map = maps[(size_t)State.mapType];
+		const auto& map = GetMap((size_t)State.mapType);
 		ImGui::SetNextWindowSize(ImVec2((map.mapImage.imageWidth * 0.5f) + 50.0f, (map.mapImage.imageHeight * 0.5f) + 90.f) * State.dpiScale, ImGuiCond_None);
 
 		ImGui::Begin((const char*)u8"»Ø·Å", &State.ShowReplay, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse);

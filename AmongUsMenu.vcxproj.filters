@@ -548,6 +548,12 @@
     <Image Include="resources\pause.png">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="resources\no_map.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\the_fungle.png">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="framework\version.def">

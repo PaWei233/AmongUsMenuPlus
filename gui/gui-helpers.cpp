@@ -352,7 +352,8 @@ void drawPlayerDot(PlayerControl* player, const ImVec2& winPos, ImU32 color, ImU
 
 	Vector2 playerPos = app::PlayerControl_GetTruePosition(player, NULL);
 
-	const auto& map = maps[(size_t)State.mapType];
+	//const auto& map = maps[(size_t)State.mapType];
+	const auto& map = GetMap((size_t)State.mapType);
 	float xOffset = getMapXOffsetSkeld(map.x_offset);
 	float yOffset = map.y_offset;
 
@@ -370,7 +371,8 @@ void drawPlayerIcon(PlayerControl* player, const ImVec2& winPos, ImU32 color)
 
 	Vector2 playerPos = app::PlayerControl_GetTruePosition(player, NULL);
 
-	const auto& map = maps[(size_t)State.mapType];
+	//const auto& map = maps[(size_t)State.mapType];
+	const auto& map = GetMap((size_t)State.mapType);
 	float xOffset = getMapXOffsetSkeld(map.x_offset);
 	float yOffset = map.y_offset;
 
@@ -402,7 +404,8 @@ void drawDeadPlayerDot(DeadBody* deadBody, const ImVec2& winPos, ImU32 color)
 
 	Vector2 bodyPos = app::DeadBody_get_TruePosition(deadBody, NULL);
 
-	const auto& map = maps[(size_t)State.mapType];
+	//const auto& map = maps[(size_t)State.mapType];
+	const auto& map = GetMap((size_t)State.mapType);
 	float xOffset = getMapXOffsetSkeld(map.x_offset);
 	float yOffset = map.y_offset;
 
@@ -419,7 +422,8 @@ void drawDeadPlayerIcon(DeadBody* deadBody, const ImVec2& winPos, ImU32 color)
 
 	Vector2 bodyPos = app::DeadBody_get_TruePosition(deadBody, NULL);
 
-	const auto& map = maps[(size_t)State.mapType];
+	//const auto& map = maps[(size_t)State.mapType];
+	const auto& map = GetMap((size_t)State.mapType);
 	float xOffset = getMapXOffsetSkeld(map.x_offset);
 	float yOffset = map.y_offset;
 

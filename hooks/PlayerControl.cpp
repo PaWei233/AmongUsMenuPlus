@@ -255,7 +255,8 @@ void dPlayerControl_FixedUpdate(PlayerControl* __this, MethodInfo* method) {
 						// NOTE:
 						// we do not add walkevents to liveReplayEvents. linedata contains everything we need for live visualization.
 						const auto outfit = GetPlayerOutfit(playerData);
-						const auto& map = maps[(size_t)State.mapType];
+						//const auto& map = maps[(size_t)State.mapType];
+						const auto& map = GetMap((size_t)State.mapType);
 						ImVec2 mapPos_pre = { map.x_offset + (playerPos.x * map.scale), map.y_offset - (playerPos.y * map.scale) };
 						if (State.replayWalkPolylineByPlayer.find(__this->fields.PlayerId) == State.replayWalkPolylineByPlayer.end())
 						{

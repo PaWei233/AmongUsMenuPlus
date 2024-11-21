@@ -400,11 +400,13 @@
     <Image Include="resources\dead_body.png" />
     <Image Include="resources\kill.png" />
     <Image Include="resources\mira_hq.png" />
+    <Image Include="resources\no_map.png" />
     <Image Include="resources\pause.png" />
     <Image Include="resources\play.png" />
     <Image Include="resources\player.png" />
     <Image Include="resources\polus.png" />
     <Image Include="resources\report.png" />
+    <Image Include="resources\the_fungle.png" />
     <Image Include="resources\the_skald.png" />
     <Image Include="resources\tick.png" />
     <Image Include="resources\vent_in.png" />
@@ -585,7 +587,7 @@ git rev-parse --abbrev-ref HEAD &gt;&gt;  gitparams.h</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_WINDOWS;_USRDLL;_CONFIGURATION_NAME="$(ConfigurationName)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch-il2cpp.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalIncludeDirectories>$(ProjectDir)appdata;$(ProjectDir)events;$(ProjectDir)framework;$(ProjectDir)gui;$(ProjectDir)hooks;$(ProjectDir)includes;$(ProjectDir)resources;$(ProjectDir)rpc;$(ProjectDir)user;$(ProjectDir)</AdditionalIncludeDirectories>

@@ -40,7 +40,8 @@ namespace Radar {
 				|| mouse.y > winpos.y + winsize.y)
 				return;
 
-			const auto& map = maps[(size_t)State.mapType];
+			//const auto& map = maps[(size_t)State.mapType];
+			const auto& map = GetMap((size_t)State.mapType);
 			float xOffset = getMapXOffsetSkeld(map.x_offset);
 			float yOffset = map.y_offset;
 
@@ -67,7 +68,8 @@ namespace Radar {
 		if (!init)
 			Radar::Init();
 
-		const auto& map = maps[(size_t)State.mapType];
+		//const auto& map = maps[(size_t)State.mapType];
+		const auto& map = GetMap((size_t)State.mapType);
 		ImGui::SetNextWindowSize(ImVec2((float)map.mapImage.imageWidth * 0.5f + 10.f, (float)map.mapImage.imageHeight * 0.5f + 10.f) * State.dpiScale, ImGuiCond_None);
 
 		if(State.LockRadar)
