@@ -4,6 +4,7 @@
 #include "utility.h"
 #include "game.h"
 #include "gui-helpers.hpp"
+#include "state.hpp"
 
 drawing_t* Esp::s_Instance = new drawing_t();
 ImGuiWindow* CurrentWindow = nullptr;
@@ -116,7 +117,15 @@ void Esp::Render()
 				/////////////////////////////////
 				if (State.ShowEsp_Tracers)
 				{
-					RenderLine(instance.LocalPosition, it.Position, it.Color, true);
+					if (State.ModMode)
+					{
+						ImVec2 offset{ instance.LocalPosition.x, instance.LocalPosition.y - GetScaleFromValue(60.0f) };
+						RenderLine(offset, it.Position, it.Color, true);
+					}
+					else
+					{
+						RenderLine(instance.LocalPosition, it.Position, it.Color, true);
+					}
 				}
 			}
 		}
